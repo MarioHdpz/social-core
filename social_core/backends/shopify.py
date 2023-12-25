@@ -2,7 +2,7 @@
 Shopify OAuth2 backend, docs at:
     https://python-social-auth.readthedocs.io/en/latest/backends/shopify.html
 """
-import imp
+import shopify
 
 from ..exceptions import AuthCanceled, AuthFailed
 from ..utils import handle_http_errors
@@ -24,8 +24,7 @@ class ShopifyOAuth2(BaseOAuth2):
     @property
     def shopify_api(self):
         if not hasattr(self, "_shopify_api"):
-            fp, pathname, description = imp.find_module("shopify")
-            self._shopify_api = imp.load_module("shopify", fp, pathname, description)
+            self._shopify_api = shopify
         return self._shopify_api
 
     def get_user_details(self, response):
